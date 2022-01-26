@@ -38,19 +38,21 @@ print(data.average_amount_per_item.mean())
 upper = data.average_amount_per_item.quantile(0.999) # use this as upper bound to remove invalid values
 print(upper)
 
-data = data[data["order_amount"] < upper]
+data = data[data["average_amount_per_item"] < upper]
 
 print(data.average_amount_per_item.max()) # 352 is a more reasonable value for the unit price of a sneaker
 
+data = data[data["order_amount"] < 704000] # remove valid, but outlier value
 
-
-print(data.order_amount.max())
-print(data.order_amount.min())
+print(data.order_amount.max()) # 1760$
+print(data.order_amount.min()) # 90$
 print(data.order_amount.mean()) # 302.58$
 print(data.order_amount.median()) # 284$
 print(data.order_amount.mode()) # 153$
 
 # should take the median or mode?
+
+
 
 
 order_amounts = np.sort(np.array(data["order_amount"]))
